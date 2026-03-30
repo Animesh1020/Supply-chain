@@ -21,8 +21,15 @@ def update_shipment():
   if not is_valid:
     return jsonify({"error": msg}), 400
   
-playload = {
-  
-   
- }
+  payload = {
+        **extracted,
+        "raw_message": message
+    }
+
+  forward_data(payload)
+
+  return jsonify({
+        "status": "success",
+        **extracted
+    })
   
