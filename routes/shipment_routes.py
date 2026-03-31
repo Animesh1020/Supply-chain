@@ -22,14 +22,15 @@ def update_shipment():
     return jsonify({"error": msg}), 400
   
   payload = {
-        **extracted,
-        "raw_message": message
+    "order_id": extracted["order_id"],
+    "shipment_id": extracted["shipment_id"], 
+    "delivery_date": extracted["delivery_date"]
     }
 
   forward_data(payload)
 
   return jsonify({
-        "status": "success",
-        **extracted
+    "status": "success",
+    "message": "Shipment data processed and forwarded successfully",
+    "data": payload
     })
-  
