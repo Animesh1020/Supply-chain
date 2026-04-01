@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from utils.regex_utils import extract_data
+from utils.regex_utils import extract_shipment_data
 from models.shipment_schema import validate_data
 from services.forward_service import forward_data
 
@@ -14,7 +14,7 @@ def update_shipment():
 
     message = data["message"]
 
-    extracted = extract_data(message)
+    extracted = extract_shipment_data(message)
 
     valid, msg = validate_data(extracted)
 
