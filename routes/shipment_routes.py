@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from utils.regex_utils import extract_shipment_data
-from models.shipment_schema import validate_data
+from models.shipment_schema import validate_shipment
 from services.forward_service import forward_data
 
 shipment_bp = Blueprint("shipment", __name__)
@@ -16,7 +16,7 @@ def update_shipment():
 
     extracted = extract_shipment_data(message)
 
-    valid, msg = validate_data(extracted)
+    valid, msg = validate_shipment(extracted)
 
     if not valid:
         return jsonify({"error": msg}), 400
